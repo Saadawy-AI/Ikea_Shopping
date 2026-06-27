@@ -61,11 +61,11 @@ Server**.
 
 **Login screen:**
 
-![Java app login screen](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/03-java-app-login.png)
+![Java app login screen](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/3-%20java-app-login.png)
 
 **Dashboard (live KPIs):**
 
-![Java app dashboard](Images/04-java-app-dashboard.png)
+![Java app dashboard](Images/04-%20java-app-dashboard.png)
 
 **Products CRUD:**
 
