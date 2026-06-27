@@ -7,19 +7,31 @@ that turns the operational sales data into a forecasting dashboard.
 **🚀 Live demo:** https://saadawy-ai-ikea-shopping-dashboardapp-kpdswe.streamlit.app/
 
 ## Project structure
+
+```
 ikea-shopping-data-ml-extension/
-
 ├── java-app/              # Original admin panel (Java Swing + SQL Server)
-
 ├── data_generation/       # Generates realistic historical sales data
-
 ├── etl/                   # ETL pipeline: SQL Server -> Data Warehouse (SQLite)
-
 ├── ml/                    # XGBoost training for sales forecasting
-
 ├── dashboard/             # Streamlit dashboard (actual sales + forecast)
-
+├── Images/                # Screenshots used in this README
 └── requirements.txt       # Python dependencies for the Data/ML layer
+```
+
+## Database design
+
+The database (`Ikea_Shopping`) has 10 tables: Users, Products,
+Categories, Orders, Order_Items, Cart, Cart_Items, Addresses, Payments,
+and Reviews, all defined in `java-app/script.sql`.
+
+**ER Diagram:**
+
+![Database ER Diagram](Images/01-database-er-diagram.png)
+
+**Schema script (SQL Server Management Studio):**
+
+![Database creation script](Images/02-database-script.png)
 
 ## 1) java-app/ — Admin Panel (OLTP)
 
@@ -31,61 +43,63 @@ Server**.
 - CRUD panels: Products, Orders, Users (`ProductsPanel.java`,
   `OrdersPanel.java`, `UsersPanel.java`)
 - Dashboard panel showing live KPIs (`DashboardPanel.java`)
-- Database schema (10 tables: Users, Products, Categories, Orders,
-  Order_Items, Cart, Cart_Items, Addresses, Payments, Reviews) defined in
-  `script.sql`
 
 ### How to run
 
-1. Run `script.sql` on your SQL Server instance to create the database
-   and schema.
+1. Run `java-app/script.sql` on your SQL Server instance to create the
+   database and schema.
 2. Update the connection details in `DatabaseConnection.java` if needed
    (default uses Windows Integrated Security on a local server).
 3. Run `run.bat`, or open the project in NetBeans and run it directly, or
    run the prebuilt `ikea_shopping.jar` (in `java-app/dist/` or
    `java-app/`) with:
-```bash
+   ```bash
    java -jar ikea_shopping.jar
-```
+   ```
+
+### Screenshots
+
+**Login screen:**
+
+![Java app login screen](Images/03-java-app-login.png)
+
+**Dashboard (live KPIs):**
+
+![Java app dashboard](Images/04-java-app-dashboard.png)
+
+**Products CRUD:**
+
+![Java app products CRUD](Images/05-java-app-products-crud.png)
+
+**Orders CRUD:**
+
+![Java app orders CRUD](Images/06-java-app-orders-crud.png)
 
 ## 2) Data & ML Extension (data_generation / etl / ml / dashboard)
 
 This layer was added on top of the same SQL Server database, without
 modifying any Java code. It turns the operational data into an
 analytics-ready data product:
+
+```
 ┌──────────────────┐     ┌──────────────┐     ┌──────────────────┐
-
 │  IKEA Swing App   │ --> │  SQL Server   │ --> │  ETL Pipeline     │
-
 │  (CRUD + Orders)  │     │  (OLTP)       │     │  Extract/Transform│
-
 └──────────────────┘     └──────────────┘     └────────┬──────────┘
-
-▼
-
-┌──────────────────┐
-
-│  warehouse.db     │
-
-│  (SQLite, Star    │
-
-│  Schema)          │
-
-└────────┬──────────┘
-
-▼
-
-┌───────────────────────┴────────────────┐
-
-▼                                        ▼
-
-┌──────────────────┐                   ┌──────────────────┐
-
-│  ML Model          │                   │  Streamlit         │
-
-│  (XGBoost Forecast)│ ───────────────> │  Dashboard          │
-
-└──────────────────┘                   └──────────────────┘
+                                                          ▼
+                                                ┌──────────────────┐
+                                                │  warehouse.db     │
+                                                │  (SQLite, Star    │
+                                                │  Schema)          │
+                                                └────────┬──────────┘
+                                                          ▼
+                                  ┌───────────────────────┴────────────────┐
+                                  ▼                                        ▼
+                        ┌──────────────────┐                   ┌──────────────────┐
+                        │  ML Model          │                   │  Streamlit         │
+                        │  (XGBoost Forecast)│ ───────────────> │  Dashboard          │
+                        └──────────────────┘                   └──────────────────┘
+```
 
 | Folder | File | Purpose |
 |---|---|---|
@@ -148,6 +162,20 @@ streamlit run app.py
 The hosted version of the dashboard runs on a fixed data snapshot
 (`warehouse.db` + `forecast_model.joblib` included in this repo), since
 the SQL Server instance is local and not reachable from the internet.
+
+### Screenshots
+
+**Main dashboard — actual sales + forecast:**
+
+![Streamlit dashboard](Images/07-streamlit-dashboard.png)
+
+**Product selector:**
+
+![Streamlit product selector](Images/08-streamlit-product-selector.png)
+
+**Top 10 products table:**
+
+![Streamlit top products table](Images/09-streamlit-top-products.png)
 
 ## Suggested future extensions
 
