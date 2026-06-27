@@ -43,7 +43,7 @@ The database (`Ikea_Shopping`) has 10 tables: Users, Products, Categories, Order
 
 **Schema script (SQL Server Management Studio):**
 
-![Database creation script](Images/02-database-script.png)
+![Database creation script](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/2-%20database-script.png)
 
 ---
 
@@ -90,19 +90,19 @@ Or run `run.bat`, or open the project in NetBeans and run it directly. The prebu
 
 **Login screen:**
 
-![Java app login screen](Images/03-java-app-login.png)
+![Java app login screen](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/3-%20java-app-login.png)
 
 **Dashboard (live KPIs):**
 
-![Java app dashboard](Images/04-java-app-dashboard.png)
+![Java app dashboard](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/4-%20java-app-dashboard.png)
 
 **Products CRUD:**
 
-![Java app products CRUD](Images/05-java-app-products-crud.png)
+![Java app products CRUD](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/5-%20java-app-products-crud.png)
 
 **Orders CRUD:**
 
-![Java app orders CRUD](Images/06-java-app-orders-crud.png)
+![Java app orders CRUD](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/6-%20java-app-orders-crud.png)
 
 ---
 
@@ -193,15 +193,15 @@ The hosted version of the dashboard runs on a fixed data snapshot (`warehouse.db
 
 **Main dashboard — actual sales + forecast:**
 
-![Streamlit dashboard](Images/07-streamlit-dashboard.png)
+![Streamlit dashboard](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/7-%20streamlit-dashboard.png)
 
 **Product selector:**
 
-![Streamlit product selector](Images/08-streamlit-product-selector.png)
+![Streamlit product selector](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/8-%20streamlit-product-selector.png)
 
 **Top 10 products table:**
 
-![Streamlit top products table](Images/09-streamlit-top-products.png)
+![Streamlit top products table](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/9-%20streamlit-top-products.png)
 
 ---
 
