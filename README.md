@@ -27,7 +27,7 @@ and Reviews, all defined in `java-app/script.sql`.
 
 **ER Diagram:**
 
-![Database ER Diagram](Images/01-database-er-diagram.png)
+![Database ER Diagram](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/1-%20database-er-diagram.png)
 
 **Schema script (SQL Server Management Studio):**
 
