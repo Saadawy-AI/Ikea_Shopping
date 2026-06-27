@@ -1,1 +1,9 @@
-
+pyodbc
+numpy
+pandas
+sqlalchemy
+scikit-learn
+xgboost
+joblib
+streamlit
+plotly
