@@ -31,7 +31,7 @@ and Reviews, all defined in `java-app/script.sql`.
 
 **Schema script (SQL Server Management Studio):**
 
-![Database creation script](Images/02-database-script.png)
+![Database creation script](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/2-%20database-script.png)
 
 ## 1) java-app/ — Admin Panel (OLTP)
 
@@ -61,7 +61,7 @@ Server**.
 
 **Login screen:**
 
-![Java app login screen](Images/03-java-app-login.png)
+![Java app login screen](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/03-java-app-login.png)
 
 **Dashboard (live KPIs):**
 
