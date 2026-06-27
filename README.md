@@ -1,14 +1,13 @@
-# IKEA Shopping — Admin Panel + Data & ML Extension
+🛒 IKEA Shopping — Admin Panel + Data & ML Extension
 
-A two-layer project: an operational **Java Swing admin panel** backed by
-SQL Server, extended with a **Data Engineering + Machine Learning** layer
-that turns the operational sales data into a forecasting dashboard.
+📌 Overview
 
-**🚀 Live demo:** https://saadawy-ai-ikea-shopping-dashboardapp-kpdswe.streamlit.app/
+A two-layer project: an operational Java Swing admin panel backed by SQL Server, extended with a Data Engineering + Machine Learning layer that turns the operational sales data into a forecasting dashboard.
 
-## Project structure
+🚀 Live demo: saadawy-ai-ikea-shopping-dashboardapp
 
-```
+🏗 Project Structure
+
 ikea-shopping-data-ml-extension/
 ├── java-app/              # Original admin panel (Java Swing + SQL Server)
 ├── data_generation/       # Generates realistic historical sales data
@@ -17,71 +16,57 @@ ikea-shopping-data-ml-extension/
 ├── dashboard/             # Streamlit dashboard (actual sales + forecast)
 ├── Images/                # Screenshots used in this README
 └── requirements.txt       # Python dependencies for the Data/ML layer
-```
 
-## Database design
 
-The database (`Ikea_Shopping`) has 10 tables: Users, Products,
-Categories, Orders, Order_Items, Cart, Cart_Items, Addresses, Payments,
-and Reviews, all defined in `java-app/script.sql`.
+⚙️ Database Design
 
-**ER Diagram:**
+The database (Ikea_Shopping) has 10 tables: Users, Products, Categories, Orders, Order_Items, Cart, Cart_Items, Addresses, Payments, and Reviews, all defined in java-app/script.sql.
 
-![Database ER Diagram](Images/01-database-er-diagram.png)
+ER Diagram:
 
-**Schema script (SQL Server Management Studio):**
+Schema script (SQL Server Management Studio):
 
-![Database creation script](Images/02-database-script.png)
+🔄 1) java-app/ — Admin Panel (OLTP)
 
-## 1) java-app/ — Admin Panel (OLTP)
+A desktop CRUD application built with Java Swing, backed by MS SQL Server.
 
-A desktop CRUD application built with **Java Swing**, backed by **MS SQL
-Server**.
+Security: Login system with SHA-256 password hashing (PasswordUtils.java)
 
-- Login system with **SHA-256** password hashing (`PasswordUtils.java`)
-- Role-based access control (Admin / User)
-- CRUD panels: Products, Orders, Users (`ProductsPanel.java`,
-  `OrdersPanel.java`, `UsersPanel.java`)
-- Dashboard panel showing live KPIs (`DashboardPanel.java`)
+Access Control: Role-based access control (Admin / User)
 
-### How to run
+Management Panels: CRUD panels for Products, Orders, and Users (ProductsPanel.java, OrdersPanel.java, UsersPanel.java)
 
-1. Run `java-app/script.sql` on your SQL Server instance to create the
-   database and schema.
-2. Update the connection details in `DatabaseConnection.java` if needed
-   (default uses Windows Integrated Security on a local server).
-3. Run `run.bat`, or open the project in NetBeans and run it directly, or
-   run the prebuilt `ikea_shopping.jar` (in `java-app/dist/` or
-   `java-app/`) with:
-   ```bash
-   java -jar ikea_shopping.jar
-   ```
+Analytics: Dashboard panel showing live KPIs (DashboardPanel.java)
 
-### Screenshots
+How to Run
 
-**Login screen:**
+Run java-app/script.sql on your SQL Server instance to create the database and schema.
 
-![Java app login screen](Images/03-java-app-login.png)
+Update the connection details in DatabaseConnection.java if needed (default uses Windows Integrated Security on a local server).
 
-**Dashboard (live KPIs):**
+Run run.bat, or open the project in NetBeans and run it directly, or run the prebuilt ikea_shopping.jar (in java-app/dist/ or java-app/) with:
 
-![Java app dashboard](Images/04-java-app-dashboard.png)
+java -jar ikea_shopping.jar
 
-**Products CRUD:**
 
-![Java app products CRUD](Images/05-java-app-products-crud.png)
+Screenshots
 
-**Orders CRUD:**
+Login screen:
 
-![Java app orders CRUD](Images/06-java-app-orders-crud.png)
 
-## 2) Data & ML Extension (data_generation / etl / ml / dashboard)
+Dashboard (live KPIs):
 
-This layer was added on top of the same SQL Server database, without
-modifying any Java code. It turns the operational data into an
-analytics-ready data product:
 
-```
+Products CRUD:
+
+
+Orders CRUD:
+
+
+📊 2) Data & ML Extension (data_generation / etl / ml / dashboard)
+
+This layer was added on top of the same SQL Server database, without modifying any Java code. It turns the operational data into an analytics-ready data product:
+
 ┌──────────────────┐     ┌──────────────┐     ┌──────────────────┐
 │  IKEA Swing App   │ --> │  SQL Server   │ --> │  ETL Pipeline     │
 │  (CRUD + Orders)  │     │  (OLTP)       │     │  Extract/Transform│
@@ -99,35 +84,48 @@ analytics-ready data product:
                         │  ML Model          │                   │  Streamlit         │
                         │  (XGBoost Forecast)│ ───────────────> │  Dashboard          │
                         └──────────────────┘                   └──────────────────┘
-```
 
-| Folder | File | Purpose |
-|---|---|---|
-| `data_generation/` | `generate_sales_data.py` | Generates 18 months of realistic historical sales data and inserts it into SQL Server |
-| `etl/` | `etl_pipeline.py` | Extract from SQL Server → Transform into a Star Schema → Load into `warehouse.db` |
-| `ml/` | `train_forecast_model.py` | Feature engineering + trains an XGBoost model to forecast daily sales per product |
-| `dashboard/` | `app.py` | Streamlit dashboard showing actual sales + forecast |
 
-### Why synthetic data?
+Folder
 
-The original data in the database is very limited (about 5 products, very
-few orders) and not enough to train a real time series model. The
-`generate_sales_data.py` script generates data with a realistic time
-pattern (monthly seasonality + weekly pattern + growth trend + random
-noise) using a fixed `seed` for reproducible results.
+File
 
-**Important note if asked in an interview:** the historical data is
-synthetic because the original demo data is too limited for training. The
-pipeline and schema themselves are designed to work on real data in
-exactly the same way, if it becomes available.
+Purpose
 
-### How to run (in order)
+data_generation/
 
-All scripts connect to SQL Server using the same method as
-`DatabaseConnection.java` (Windows Integrated Security), so they run
-directly on your machine without any changes.
+generate_sales_data.py
 
-```bash
+Generates 18 months of realistic historical sales data and inserts it into SQL Server
+
+etl/
+
+etl_pipeline.py
+
+Extract from SQL Server → Transform into a Star Schema → Load into warehouse.db
+
+ml/
+
+train_forecast_model.py
+
+Feature engineering + trains an XGBoost model to forecast daily sales per product
+
+dashboard/
+
+app.py
+
+Streamlit dashboard showing actual sales + forecast
+
+Why Synthetic Data?
+
+The original data in the database is very limited (about 5 products, very few orders) and not enough to train a real time series model. The generate_sales_data.py script generates data with a realistic time pattern (monthly seasonality + weekly pattern + growth trend + random noise) using a fixed seed for reproducible results.
+
+💡 Important note if asked in an interview: The historical data is synthetic because the original demo data is too limited for training. The pipeline and schema themselves are designed to work on real data in exactly the same way, if it becomes available.
+
+How to Run (in order)
+
+All scripts connect to SQL Server using the same method as DatabaseConnection.java (Windows Integrated Security), so they run directly on your machine without any changes.
+
 pip install -r requirements.txt
 
 # 1) Generate realistic historical data into SQL Server
@@ -145,41 +143,50 @@ python train_forecast_model.py
 # 4) Run the dashboard
 cd ../dashboard
 streamlit run app.py
-```
 
-### Technical details
 
-- **Star Schema**: `fact_sales` (sales aggregated daily per product) + `dim_product` + `dim_date`
-- **Features used in the model**: day of week, month, weekend flag, lag-1, lag-7, 7-day rolling mean
-- **Model evaluation**: time-based split — last 15% of the data is the test set, not a random split, since this is a time series problem
-- **Metrics**: MAE and RMSE
-- **Forecasting**: recursive forecasting for 14 days ahead, using predicted values as inputs for subsequent days
+Technical Details
 
-### Live demo
+Star Schema: fact_sales (sales aggregated daily per product) + dim_product + dim_date
+
+Features used in the model: day of week, month, weekend flag, lag-1, lag-7, 7-day rolling mean
+
+Model evaluation: time-based split — last 15% of the data is the test set, not a random split, since this is a time series problem
+
+Metrics: MAE and RMSE
+
+Forecasting: recursive forecasting for 14 days ahead, using predicted values as inputs for subsequent days
+
+Live Demo
 
 🔗 https://saadawy-ai-ikea-shopping-dashboardapp-kpdswe.streamlit.app/
 
-The hosted version of the dashboard runs on a fixed data snapshot
-(`warehouse.db` + `forecast_model.joblib` included in this repo), since
-the SQL Server instance is local and not reachable from the internet.
+The hosted version of the dashboard runs on a fixed data snapshot (warehouse.db + forecast_model.joblib included in this repo), since the SQL Server instance is local and not reachable from the internet.
 
-### Screenshots
+Screenshots
 
-**Main dashboard — actual sales + forecast:**
+Main dashboard — actual sales + forecast:
 
-![Streamlit dashboard](Images/07-streamlit-dashboard.png)
 
-**Product selector:**
+Product selector:
 
-![Streamlit product selector](Images/08-streamlit-product-selector.png)
 
-**Top 10 products table:**
+Top 10 products table:
 
-![Streamlit top products table](Images/09-streamlit-top-products.png)
 
-## Suggested future extensions
+🧠 Suggested Future Extensions
 
-- Replace `warehouse.db` (SQLite) with PostgreSQL or Azure Synapse if the project grows
-- Use Airflow to schedule the ETL periodically instead of running it manually
-- Add anomaly detection on inventory movement (stock_qty) to catch unusual changes
-- Add an "Open Analytics" button inside the Swing app itself (`ProcessBuilder`) to launch the dashboard
+Replace warehouse.db (SQLite) with PostgreSQL or Azure Synapse if the project grows
+
+Use Airflow to schedule the ETL periodically instead of running it manually
+
+Add anomaly detection on inventory movement (stock_qty) to catch unusual changes
+
+Add an "Open Analytics" button inside the Swing app itself (ProcessBuilder) to launch the dashboard
+
+👤 Author
+
+Mohamed Saadawy
+📎 GitHub · LinkedIn · Portfolio
+
+This project demonstrates an enterprise-level migration from an OLTP system to an analytics-ready Data & ML application, mirroring real-world architecture.
