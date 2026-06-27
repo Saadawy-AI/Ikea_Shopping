@@ -19,6 +19,7 @@ Run in this order the first time:
     4. streamlit run app.py
 """
 
+import os
 import sqlite3
 from datetime import timedelta
 
@@ -28,8 +29,12 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-WAREHOUSE_PATH = "../etl/warehouse.db"
-MODEL_PATH = "../ml/forecast_model.joblib"
+# Build absolute paths based on this file's location, so the app works
+# regardless of the working directory it's launched from (local machine,
+# Streamlit Cloud, etc.)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+WAREHOUSE_PATH = os.path.join(BASE_DIR, "..", "etl", "warehouse.db")
+MODEL_PATH = os.path.join(BASE_DIR, "..", "ml", "forecast_model.joblib")
 FORECAST_DAYS = 14
 
 
