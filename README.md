@@ -27,11 +27,11 @@ and Reviews, all defined in `java-app/script.sql`.
 
 **ER Diagram:**
 
-![Database ER Diagram](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/1-%20database-er-diagram.png)
+![Database ER Diagram](Images/01-database-er-diagram.png)
 
 **Schema script (SQL Server Management Studio):**
 
-![Database creation script](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/2-%20database-script.png)
+![Database creation script](Images/02-database-script.png)
 
 ## 1) java-app/ — Admin Panel (OLTP)
 
@@ -61,11 +61,11 @@ Server**.
 
 **Login screen:**
 
-![Java app login screen](https://github.com/Saadawy-AI/Ikea_Shopping/blob/main/Images/3-%20java-app-login.png)
+![Java app login screen](Images/03-java-app-login.png)
 
 **Dashboard (live KPIs):**
 
-![Java app dashboard](Images/04-%20java-app-dashboard.png)
+![Java app dashboard](Images/04-java-app-dashboard.png)
 
 **Products CRUD:**
 
